@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class TouristService {
 
-    private TouristRepository touristRepository;
+    private final TouristRepository touristRepository;
 
     public TouristService(TouristRepository touristRepository){
         this.touristRepository = touristRepository;

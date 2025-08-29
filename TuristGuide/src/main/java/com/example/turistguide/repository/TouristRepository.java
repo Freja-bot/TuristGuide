@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class TouristRepository {
 
-    private List<TouristAttraction> attractions;
+    private final List<TouristAttraction> attractions;
 
     public TouristRepository() {
 
