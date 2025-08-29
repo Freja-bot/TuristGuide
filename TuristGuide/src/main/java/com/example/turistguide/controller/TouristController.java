@@ -19,13 +19,10 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    private boolean doesAttractionExist(TouristAttraction touristAttraction){
-        return (touristAttraction.getName() != null && touristService.findAttractionByName(touristAttraction.getName()) != null);
-    }
-
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addTouristAttraction(@RequestBody TouristAttraction touristAttraction){
-        if(!doesAttractionExist(touristAttraction)) {
+
+        if(touristAttraction.getName() != null  && !touristService.doesAttractionExist(touristAttraction)) {
 
             return new ResponseEntity<>(touristService.addTouristAttraction(touristAttraction), HttpStatus.CREATED);
 
@@ -50,7 +47,7 @@ public class TouristController {
 
     @PostMapping("/update")
     public ResponseEntity<TouristAttraction> updateTouristAttraction(@RequestBody TouristAttraction touristAttraction){
-        if(doesAttractionExist(touristAttraction)) {
+        if(touristService.doesAttractionExist(touristAttraction)) {
             return new ResponseEntity<>(touristService.updateTouristAttraction(touristAttraction), HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,10 +55,12 @@ public class TouristController {
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteTouristAttraction(@PathVariable String name){
-
         TouristAttraction deletedTouristAttraction = touristService.findAttractionByName(name);
-        touristService.deleteTouristAttraction(name);
-        return new ResponseEntity<>(deletedTouristAttraction, HttpStatus.ACCEPTED);
+        if(deletedTouristAttraction != null) {
+            touristService.deleteTouristAttraction(name);
+            return new ResponseEntity<>(deletedTouristAttraction, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

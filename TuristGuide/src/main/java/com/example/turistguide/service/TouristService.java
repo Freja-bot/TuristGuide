@@ -39,4 +39,8 @@ public class TouristService {
         touristRepository.deleteTouristAttraction(name);
     }
 
+    public boolean doesAttractionExist(TouristAttraction touristAttraction){
+        return findAttractionByName(touristAttraction.getName()) != null;
+    }
+
 }
