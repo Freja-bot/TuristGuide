@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update attraction</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Update attraction</h1>
+<h2 th:text="'opdater ' + ${name}"></h2>
+<form action="#" th:action="@{/attractions/update}" th:object="${attraction}" method="post">
+    <input type="hidden" th:field="*{name}">
+    <br>
+    <label>Beskrivelse</label>
+    <input type="text" th:field="*{description}">
+    <br>
+    <button type="submit">Update attraction</button>
+</form>
+
+</body>
+</html>

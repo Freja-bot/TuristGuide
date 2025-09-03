@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add attractions form</title>
+</head>
+<body>
+<h1>Add new attraction</h1>
+<form action="#" th:action="@{/attractions/save}" th:object="${attraction}" method="post">
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>Beskrivelse</label>
+    <input type="text" th:field="*{description}">
+    <br>
+    <button type="submit">Add attraction</button>
+</form>
+
+</body>
+</html>
