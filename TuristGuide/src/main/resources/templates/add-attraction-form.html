@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>registrer attraktion</title>
+</head>
+<body>
+<h1>Attraktion registrerings formular</h1>
+
+<form action="#" th:action="@{/attractions/add}" th:object="${touristAttraction}" method="post">
+    <label>Attraktionens navn</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>Beskrivelse</label>
+    <input type="text" th:field="*{description}">
+    <br>
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

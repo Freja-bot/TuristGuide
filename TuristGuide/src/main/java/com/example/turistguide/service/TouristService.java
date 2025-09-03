@@ -20,7 +20,10 @@ public class TouristService {
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
-        return touristRepository.addTouristAttraction(touristAttraction);
+        if(touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
+            return touristRepository.addTouristAttraction(touristAttraction);
+        }
+        return null;
     }
 
     public List<TouristAttraction> getAllTouristAttraction(){
