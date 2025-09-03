@@ -21,6 +21,7 @@ public class TouristRepository {
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
+
         if(touristAttraction.getDescription() == null){
             touristAttraction.setDescription("Ingen oplysninger");
         }

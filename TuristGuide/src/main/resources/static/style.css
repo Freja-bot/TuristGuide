@@ -38,6 +38,21 @@ footer{
     border: 0;
 }
 
+table, th, td {
+    background-color: var(--box_bg);
+    border: 1px solid var(--accent);
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+a {
+    color: var(--accent);
+}
+
 .imageBox{
     display: flex;
     align-items: center;
@@ -58,7 +73,5 @@ footer{
     border: 0;
 }
 
-a {
-    color: var(--accent);
-}
+
 
