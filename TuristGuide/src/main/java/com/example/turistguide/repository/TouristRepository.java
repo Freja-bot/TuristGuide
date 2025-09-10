@@ -1,5 +1,6 @@
 package com.example.turistguide.repository;
 
+import com.example.turistguide.model.Tag;
 import com.example.turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +15,9 @@ public class TouristRepository {
     public TouristRepository() {
 
         attractions = new ArrayList<>();
-        attractions.add(new TouristAttraction("Tivoli", "Forlystelsespark i København"));
-        attractions.add(new TouristAttraction("Bakken", "Forlystelsespark i ydre København"));
-        attractions.add(new TouristAttraction("Djurs sommerland", "Danmarks bedste rutschebaner, det kæmpestore Vandland og over 60 sjove forlystelser for både små og store legebørn."));
+        attractions.add(new TouristAttraction("Tivoli", "Forlystelsespark i København", "København", List.of(Tag.ADGANG_FOR_GANGBESVAEREDE, Tag.KONCERTHAL)));
+        attractions.add(new TouristAttraction("Bakken", "Forlystelsespark i ydre København", "Klampenborg", List.of(Tag.ADGANG_FOR_GANGBESVAEREDE, Tag.GRATIS_INDGANG, Tag.KONCERTHAL, Tag.HUNDETILLADELSE)));
+        attractions.add(new TouristAttraction("Djurs sommerland", "Danmarks bedste rutschebaner, det kæmpestore Vandland og over 60 sjove forlystelser for både små og store legebørn.", "Nimtofte", List.of(Tag.VANDLAND, Tag.HUNDETILLADELSE)));
 
     }
 
@@ -25,6 +26,10 @@ public class TouristRepository {
         if(touristAttraction.getDescription() == null){
             touristAttraction.setDescription("Ingen oplysninger");
         }
+        if(touristAttraction.getCity() == null){
+            touristAttraction.setCity("Ingen Lokation");
+        }
+
         attractions.add(touristAttraction);
         return touristAttraction;
     }
@@ -52,6 +57,17 @@ public class TouristRepository {
         //check all attributes of TouristAttraction class for updated information
         if(updatedTouristAttraction.getDescription() != null){
             touristAttraction.setDescription(updatedTouristAttraction.getDescription());
+        }
+        if(updatedTouristAttraction.getCity() != null){
+            touristAttraction.setCity(updatedTouristAttraction.getCity());
+        }
+        List<Tag> updatedTags = updatedTouristAttraction.getTags();
+        if(updatedTags != null){ //TODO test denne condition
+            while(!updatedTags.isEmpty()){
+                Tag tag = updatedTags.getFirst();
+                touristAttraction.addTag(tag);
+                updatedTags.remove(tag);
+            }
         }
 
         //resolve update

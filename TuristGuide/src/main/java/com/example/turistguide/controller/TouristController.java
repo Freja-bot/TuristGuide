@@ -62,6 +62,17 @@ public class TouristController {
         return "redirect:localhost:8080";
     }
 
+    @GetMapping("/{name}/tags")
+    public String showAttractionTags(@PathVariable String name, Model model){
+        TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
+        if(touristAttraction != null) {
+            model.addAttribute("touristAttraction", touristAttraction);
+            return "tags";
+        }
+        return "redirect:/attractions";
+    }
+
+
     @PostMapping("/update")
     public String updateTouristAttraction(@ModelAttribute TouristAttraction touristAttraction){
         touristService.updateTouristAttraction(touristAttraction);
