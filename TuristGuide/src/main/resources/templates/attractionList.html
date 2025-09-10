@@ -16,9 +16,14 @@
     <tr th:each="touristAttraction: ${touristAttractions}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
-        <td><a class="linkToButton" th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}" >Edit</a></td>
+        <td>
+            <a class="linkToButton" th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}" >Opdater</a>
+            <a class="linkToButton" th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}" >Tags</a>
+        </td>
     </tr>
 </table>
+
+<a class="linkToButton" th:href="@{/attractions/add}" >Tags</a>
 
 <footer>
     <p>Kontakt oplysninger <br>Teknisk hjælp : <a href="mailto:ForlystelsesGuiden@teknikker.dk">ForlystelsesGuiden@teknikker.dk</a><br>
