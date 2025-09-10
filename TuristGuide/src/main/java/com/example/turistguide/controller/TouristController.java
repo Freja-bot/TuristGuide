@@ -27,6 +27,8 @@ public class TouristController {
     @GetMapping("/add")
     public String showAddAttractionForm(Model model){
         model.addAttribute("touristAttraction", new TouristAttraction());
+        model.addAttribute("cities", touristService.getCities());
+        model.addAttribute("tags", touristService.getTags());
         return "add-attraction-form";
     }
 
@@ -38,7 +40,7 @@ public class TouristController {
         if(resultingTouristAttraction != null){
             return "redirect:/attractions";
         }
-        return "redirect:http://localhost:8080"; //create failed to add page
+        return "redirect:index"; //create failed to add page
 
     }
 
@@ -49,7 +51,7 @@ public class TouristController {
             model.addAttribute("touristAttraction", touristAttraction);
             return "show_attraction";
         }
-        return "redirect:localhost:8080"; //create fail state
+        return "redirect:index"; //create fail state
     }
 
     @GetMapping("/{name}/edit")
@@ -59,7 +61,7 @@ public class TouristController {
             model.addAttribute("touristAttraction", touristAttraction);
             return "update-attraction-form";
         }
-        return "redirect:localhost:8080";
+        return "redirect:index";
     }
 
     @GetMapping("/{name}/tags")
