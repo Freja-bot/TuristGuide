@@ -12,30 +12,30 @@ public class TouristService {
 
     private final TouristRepository touristRepository;
 
-    public TouristService(TouristRepository touristRepository){
+    public TouristService(TouristRepository touristRepository) {
         this.touristRepository = touristRepository;
     }
 
-    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
-        if(touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
+    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
+        if (!touristAttraction.getName().isEmpty() && touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
             return touristRepository.addTouristAttraction(touristAttraction);
         }
         return null;
     }
 
-    public List<TouristAttraction> getAllTouristAttraction(){
+    public List<TouristAttraction> getAllTouristAttraction() {
         return touristRepository.getAllTouristAttraction();
     }
 
-    public TouristAttraction getTouristAttraction(String name){
+    public TouristAttraction getTouristAttraction(String name) {
         return touristRepository.getTouristAttraction(name);
     }
 
-    public void updateTouristAttraction(TouristAttraction touristAttraction){
+    public void updateTouristAttraction(TouristAttraction touristAttraction) {
         touristRepository.updateTouristAttraction(touristAttraction);
     }
 
-    public void deleteTouristAttraction(String name){
+    public void deleteTouristAttraction(String name) {
         touristRepository.deleteTouristAttraction(name);
     }
 

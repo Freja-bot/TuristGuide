@@ -22,12 +22,12 @@ public class TouristRepository {
 
     }
 
-    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
+    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
 
-        if(touristAttraction.getDescription() == null){
+        if (touristAttraction.getDescription() == null) {
             touristAttraction.setDescription("Ingen oplysninger");
         }
-        if(touristAttraction.getCity() == null){
+        if (touristAttraction.getCity() == null) {
             touristAttraction.setCity("Ukendt Lokation");
         }
 
@@ -35,49 +35,46 @@ public class TouristRepository {
         return touristAttraction;
     }
 
-    public TouristAttraction findAttractionByName(String name){
-        for (TouristAttraction touristAttraction : attractions){
-            if(touristAttraction.getName().equalsIgnoreCase(name)){
+    public TouristAttraction findAttractionByName(String name) {
+        for (TouristAttraction touristAttraction : attractions) {
+            if (touristAttraction.getName().equalsIgnoreCase(name)) {
                 return touristAttraction;
             }
         }
         return null;
     }
 
-    public List<TouristAttraction> getAllTouristAttraction(){
+    public List<TouristAttraction> getAllTouristAttraction() {
         return attractions;
     }
-    public TouristAttraction getTouristAttraction(String name){
+
+    public TouristAttraction getTouristAttraction(String name) {
         return findAttractionByName(name);
     }
 
-    public void updateTouristAttraction(TouristAttraction updatedTouristAttraction){
+    public void updateTouristAttraction(TouristAttraction updatedTouristAttraction) {
         TouristAttraction touristAttraction = findAttractionByName(updatedTouristAttraction.getName());
         deleteTouristAttraction(touristAttraction.getName());
 
-        //check all attributes of TouristAttraction class for updated information
-        if(updatedTouristAttraction.getDescription() != null){
+//        //check all attributes of TouristAttraction class for updated information
+        if (updatedTouristAttraction.getDescription() != null) {
             touristAttraction.setDescription(updatedTouristAttraction.getDescription());
         }
-        if(updatedTouristAttraction.getCity() != null){
+        if (updatedTouristAttraction.getCity() != null) {
             touristAttraction.setCity(updatedTouristAttraction.getCity());
         }
         List<Tag> updatedTags = updatedTouristAttraction.getTags();
-        if(updatedTags != null){ //TODO test denne condition
-            while(!updatedTags.isEmpty()){
-                Tag tag = updatedTags.getFirst();
-                touristAttraction.addTag(tag);
-                updatedTags.remove(tag);
-            }
+        if (updatedTags != null) { //TODO test denne condition
+            touristAttraction.setTags(updatedTouristAttraction.getTags());
         }
 
         //resolve update
         attractions.add(touristAttraction);
     }
 
-    public void deleteTouristAttraction(String name){
-        for (TouristAttraction touristAttraction : attractions){
-            if(touristAttraction.getName().equalsIgnoreCase(name)){
+    public void deleteTouristAttraction(String name) {
+        for (TouristAttraction touristAttraction : attractions) {
+            if (touristAttraction.getName().equalsIgnoreCase(name)) {
                 attractions.remove(touristAttraction);
                 return;
             }
@@ -646,10 +643,11 @@ public class TouristRepository {
                 "Aarslev",
                 "Aarup",
                 "Ukendt Lokation"
-            );
-        }
-        public List<Tag> getTags() {
+        );
+    }
+
+    public List<Tag> getTags() {
         return List.of(Tag.values());
-        }
+    }
 
 }

@@ -36,12 +36,13 @@ public class TouristController {
     @PostMapping("/save")
     public String addTouristAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
+
         TouristAttraction resultingTouristAttraction = touristService.addTouristAttraction(touristAttraction);
 
         if (resultingTouristAttraction != null) {
             return "redirect:/attractions";
         }
-        return "redirect:index"; //create failed to add page
+        return "redirect:localhost:8080"; //create failed to add page
 
     }
 
