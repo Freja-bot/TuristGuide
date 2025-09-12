@@ -1,4 +1,5 @@
 package com.example.turistguide.controller;
+
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.service.TouristService;
 import org.springframework.stereotype.Controller;
@@ -14,18 +15,18 @@ public class TouristController {
     // lav fail states
     private final TouristService touristService;
 
-    public TouristController(TouristService touristService){
+    public TouristController(TouristService touristService) {
         this.touristService = touristService;
     }
 
     @GetMapping()
-    public String getAllTouristAttraction(Model model){
+    public String getAllTouristAttraction(Model model) {
         model.addAttribute("touristAttractions", touristService.getAllTouristAttraction());
         return "attractionList";
     }
 
     @GetMapping("/add")
-    public String showAddAttractionForm(Model model){
+    public String showAddAttractionForm(Model model) {
         model.addAttribute("touristAttraction", new TouristAttraction());
         model.addAttribute("cities", touristService.getCities());
         model.addAttribute("tags", touristService.getTags());
@@ -33,11 +34,11 @@ public class TouristController {
     }
 
     @PostMapping("/save")
-    public String addTouristAttraction(@ModelAttribute TouristAttraction touristAttraction){
+    public String addTouristAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
         TouristAttraction resultingTouristAttraction = touristService.addTouristAttraction(touristAttraction);
 
-        if(resultingTouristAttraction != null){
+        if (resultingTouristAttraction != null) {
             return "redirect:/attractions";
         }
         return "redirect:index"; //create failed to add page
@@ -45,9 +46,9 @@ public class TouristController {
     }
 
     @GetMapping("{name}")
-    public String getTouristAttraction(@PathVariable(required = false) String name, Model model){
+    public String getTouristAttraction(@PathVariable(required = false) String name, Model model) {
         TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
-        if(touristAttraction != null){
+        if (touristAttraction != null) {
             model.addAttribute("touristAttraction", touristAttraction);
             return "show_attraction";
         }
@@ -55,19 +56,21 @@ public class TouristController {
     }
 
     @GetMapping("/{name}/edit")
-    public String showUpdateAttractionForm(@PathVariable String name, Model model){
+    public String showUpdateAttractionForm(@PathVariable String name, Model model) {
         TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
-        if(touristAttraction != null){
+        if (touristAttraction != null) {
             model.addAttribute("touristAttraction", touristAttraction);
+            model.addAttribute("cities", touristService.getCities());
+            model.addAttribute("tags", touristService.getTags());
             return "update-attraction-form";
         }
         return "redirect:index";
     }
 
     @GetMapping("/{name}/tags")
-    public String showAttractionTags(@PathVariable String name, Model model){
+    public String showAttractionTags(@PathVariable String name, Model model) {
         TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
-        if(touristAttraction != null) {
+        if (touristAttraction != null) {
             model.addAttribute("touristAttraction", touristAttraction);
             return "tags";
         }
@@ -76,13 +79,13 @@ public class TouristController {
 
 
     @PostMapping("/update")
-    public String updateTouristAttraction(@ModelAttribute TouristAttraction touristAttraction){
+    public String updateTouristAttraction(@ModelAttribute TouristAttraction touristAttraction) {
         touristService.updateTouristAttraction(touristAttraction);
         return "redirect:/attractions";
     }
 
     @PostMapping("/delete/{name}")
-    public String deleteTouristAttraction(@PathVariable String name){
+    public String deleteTouristAttraction(@PathVariable String name) {
         touristService.deleteTouristAttraction(name);
         return "redirect:/attractions";
     }

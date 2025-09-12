@@ -8,7 +8,7 @@
 <body>
 <h1 class="textBox">Attraktion registrerings formular</h1>
 
-<form class="textBox" action="#" th:action="@{/attractions/add}" th:object="${touristAttraction}" method="post">
+<form class="textBox" action="#" th:action="@{/attractions/save}" th:object="${touristAttraction}" method="post">
     <label>Attraktionens navn</label>
     <br>
     <input type="text" th:field="${touristAttraction.name}">
@@ -28,9 +28,9 @@
     </select>
     <br>
     <label>Tags</label>
-        <div th:each="value : ${tags}">
-            <input type="checkbox" th:field="*{tags}" th:value="${value}" th:text="${value}" />
-        </div>
+    <div th:each="value : ${tags}">
+        <input type="checkbox" th:field="*{tags}" th:value="${value}" th:text="${value}"/>
+    </div>
     <br><br>
     <button type="submit">Register</button>
 </form>
