@@ -1,7 +1,6 @@
 package com.example.turistguide.model;
 
 import java.util.List;
-import java.util.Locale;
 
 public class TouristAttraction {
     private String name;

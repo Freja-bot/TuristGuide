@@ -16,10 +16,6 @@ public class TouristService {
         this.touristRepository = touristRepository;
     }
 
-    public TouristAttraction findAttractionByName(String name) {
-        return touristRepository.findAttractionByName(name);
-    }
-
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
         if(touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
             return touristRepository.addTouristAttraction(touristAttraction);
@@ -35,16 +31,12 @@ public class TouristService {
         return touristRepository.getTouristAttraction(name);
     }
 
-    public TouristAttraction updateTouristAttraction(TouristAttraction touristAttraction){
-        return touristRepository.updateTouristAttraction(touristAttraction);
+    public void updateTouristAttraction(TouristAttraction touristAttraction){
+        touristRepository.updateTouristAttraction(touristAttraction);
     }
 
     public void deleteTouristAttraction(String name){
         touristRepository.deleteTouristAttraction(name);
-    }
-
-    public boolean doesAttractionExist(TouristAttraction touristAttraction){
-        return findAttractionByName(touristAttraction.getName()) != null;
     }
 
     public List<String> getCities() {

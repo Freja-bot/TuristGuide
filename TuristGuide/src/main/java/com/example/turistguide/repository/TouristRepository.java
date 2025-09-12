@@ -51,7 +51,7 @@ public class TouristRepository {
         return findAttractionByName(name);
     }
 
-    public TouristAttraction updateTouristAttraction(TouristAttraction updatedTouristAttraction){
+    public void updateTouristAttraction(TouristAttraction updatedTouristAttraction){
         TouristAttraction touristAttraction = findAttractionByName(updatedTouristAttraction.getName());
         deleteTouristAttraction(touristAttraction.getName());
 
@@ -73,7 +73,6 @@ public class TouristRepository {
 
         //resolve update
         attractions.add(touristAttraction);
-        return touristAttraction;
     }
 
     public void deleteTouristAttraction(String name){
