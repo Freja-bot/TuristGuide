@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>registrer attraktion</title>
+    <link th:href="@{/style.css}" rel="styleSheet"/>
 </head>
 <body>
-<h1>Attraktion registrerings formular</h1>
+<h1 class="textBox">Attraktion registrerings formular</h1>
 
-<form action="#" th:action="@{/attractions/add}" th:object="${touristAttraction}" method="post">
+<form class="textBox" action="#" th:action="@{/attractions/save}" th:object="${touristAttraction}" method="post">
     <label>Attraktionens navn</label>
-    <input type="text" th:field="*{name}">
+    <br>
+    <input type="text" th:field="${touristAttraction.name}">
     <br>
     <label>Beskrivelse</label>
+    <br>
     <input type="text" th:field="*{description}">
     <br>
+    <label>Lokation</label>
+
+    <select th:field="*{city}">
+        <option value="">-- vælg by --</option>
+        <option th:each="by : ${cities}"
+                th:value="${by}"
+                th:text="${by}">
+        </option>
+    </select>
+    <br>
+    <label>Tags</label>
+    <div th:each="value : ${tags}">
+        <input type="checkbox" th:field="*{tags}" th:value="${value}" th:text="${value}"/>
+    </div>
+    <br><br>
     <button type="submit">Register</button>
 </form>
 </body>

@@ -6,7 +6,8 @@
     <link rel="styleSheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<nav><p id="TitleName">ForlystelsesGuiden</p><a href="/attractions">Forlystelses parker</a> <a href="/attractions/tivoli">Tivoli</a></nav>
+<nav><p id="TitleName">ForlystelsesGuiden</p><a href="/attractions">Forlystelses parker</a> <a
+        href="/attractions/tivoli">Tivoli</a></nav>
 <h1 class="textBox">Attraktion opdaterings formular</h1>
 <p class="textBox" th:text="'Du er ved at opdaterer ' + ${name}"></p>
 <form action="#" th:action="@{/attractions/update}" th:object="${touristAttraction}" method="post">
@@ -16,6 +17,21 @@
     <label>Beskrivelse</label>
     <input type="text" th:field="*{description}">
     <br>
+    <label>Lokation</label>
+
+    <select th:field="*{city}">
+        <option value="">-- vælg by --</option>
+        <option th:each="by : ${cities}"
+                th:value="${by}"
+                th:text="${by}">
+        </option>
+    </select>
+    <br>
+    <label>Tags</label>
+    <div th:each="value : ${tags}">
+        <input type="checkbox" th:field="*{tags}" th:value="${value}" th:text="${value}"/>
+    </div>
+    <br><br>
     <button type="submit">Opdater</button>
 </form>
 </body>

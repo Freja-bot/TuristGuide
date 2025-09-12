@@ -6,24 +6,31 @@
     <link th:href="@{/style.css}" rel="styleSheet"/>
 </head>
 <body>
-<nav><p id="TitleName">ForlystelsesGuiden</p><a href="/attractions">Forlystelses parker</a> <a href="/attractions/tivoli">Tivoli</a></nav>
-<h1>Forlystelse Attraktioner:</h1>
+<nav><p id="TitleName">ForlystelsesGuiden</p><a href="/attractions">Forlystelses parker</a> <a
+        href="/attractions/tivoli">Tivoli</a></nav>
+<h1 class="textBox">Forlystelse Attraktioner:</h1>
 <table>
     <tr th:if="${touristAttractions.isEmpty()}">Der er ikke nogen attraktioner</tr>
     <tr th:if="${!touristAttractions.isEmpty()}">
-        <th>Navn</th><th>Beskrivelse</th>
+        <th>Navn</th>
+        <th>Beskrivelse</th>
+        <th>by</th>
     </tr>
     <tr th:each="touristAttraction: ${touristAttractions}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
+        <td th:text="${touristAttraction.city}"></td>
         <td>
-            <a class="linkToButton" th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}" >Opdater</a>
-            <a class="linkToButton" th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}" >Tags</a>
+            <a class="linkToButton" th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}">Opdater</a>
+            <a class="linkToButton" th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}">Tags</a>
+            <form action="#" th:action="@{/attractions/delete/{name}(name=${touristAttraction.name})}" method="post">
+                <button type="submit">Slet</button>
+            </form>
         </td>
     </tr>
 </table>
 
-<a class="linkToButton" th:href="@{/attractions/add}" >Tags</a>
+<a class="linkToButton" th:href="@{/attractions/add}">Tilføj attraktion</a>
 
 <footer>
     <p>Kontakt oplysninger <br>Teknisk hjælp : <a href="mailto:ForlystelsesGuiden@teknikker.dk">ForlystelsesGuiden@teknikker.dk</a><br>
