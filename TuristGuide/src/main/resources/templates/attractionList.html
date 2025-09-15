@@ -26,6 +26,7 @@
             <form action="#" th:action="@{/attractions/delete/{name}(name=${touristAttraction.name})}" method="post">
                 <button type="submit">Slet</button>
             </form>
+            <a class="linkToButton" th:href="@{/attractions/{name}(name=${touristAttraction.name})}">Info</a>
         </td>
     </tr>
 </table>

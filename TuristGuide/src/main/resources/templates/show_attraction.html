@@ -15,11 +15,13 @@
     <p th:text="'Ligger i ' + ${touristAttraction.city}"/>
     <p th:text="${touristAttraction.description}"/>
 </div>
+<a class="linkToButton" th:href="@{/attractions}">Tilbage</a>
 
 <footer>
     <p>Kontakt oplysninger <br>Teknisk hjælp : <a href="mailto:ForlystelsesGuiden@teknikker.dk">ForlystelsesGuiden@teknikker.dk</a><br>
         Lokal guide : <a href="mailto:ForlystelsesGuiden@guide.dk">ForlystelsesGuiden@guide.dk</a>
     </p>
+
 </footer>
 
 </body>
