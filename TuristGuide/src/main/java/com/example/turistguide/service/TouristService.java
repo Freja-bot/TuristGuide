@@ -17,7 +17,8 @@ public class TouristService {
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
-        if (!touristAttraction.getName().isEmpty() && touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
+        if (!touristAttraction.getName().isEmpty()
+                && touristRepository.findAttractionByName(touristAttraction.getName()) == null) {
             return touristRepository.addTouristAttraction(touristAttraction);
         }
         return null;

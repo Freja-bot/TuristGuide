@@ -31,9 +31,12 @@
     <div th:each="value : ${tags}">
         <input type="checkbox" th:field="*{tags}" th:value="${value}" th:text="${value}"/>
     </div>
+    <br>
+    <label>Entrepris</label>
+    <input type="number" step="0.01" min="0" max="1000000" required th:field="*{ticketPriceInDKK}">
     <br><br>
     <button type="submit">Opdater</button>
-    <a class="linkToButton" th:href="@{/attractions}" >Tilbage</a>
+    <a class="linkToButton" th:href="@{/attractions}">Tilbage</a>
 </form>
 </body>
 </html>
