@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/attractions")
 public class TouristController {
     //TODO:
-    // lav endpoint /attractions/{nam}/tags
     // lav fail states
+    // færdiggør test
+    // BilletPriser
     private final TouristService touristService;
 
     public TouristController(TouristService touristService) {
