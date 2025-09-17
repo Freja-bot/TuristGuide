@@ -24,8 +24,9 @@
             <a class="linkToButton" th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}">Opdater</a>
             <a class="linkToButton" th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}">Tags</a>
             <form action="#" th:action="@{/attractions/delete/{name}(name=${touristAttraction.name})}" method="post">
-                <button type="submit">Slet</button>
+                <button class="linkToButton" type="submit">Slet</button>
             </form>
+            <a class="linkToButton" th:href="@{/attractions/{name}(name=${touristAttraction.name})}">Info</a>
         </td>
     </tr>
 </table>

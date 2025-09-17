@@ -7,15 +7,18 @@ public class TouristAttraction {
     private String description;
     private String city;
     private List<Tag> tags;
+    private double ticketPriceInDKK;
 
-    public TouristAttraction(String name, String description, String city, List<Tag> tags) {
+    public TouristAttraction(String name, String description, String city, List<Tag> tags, double ticketPriceInDKK) {
         this.name = name;
         this.description = description;
         this.city = city;
         this.tags = tags;
+        this.ticketPriceInDKK = ticketPriceInDKK;
     }
 
-    public TouristAttraction(){}
+    public TouristAttraction() {
+    }
 
     public String getName() {
         return name;
@@ -49,12 +52,19 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-    public void deleteTag(Tag tag){
+    public void deleteTag(Tag tag) {
         tags.remove(tag);
     }
 
-    public void addTag(Tag tag){
+    public void addTag(Tag tag) {
         tags.add(tag);
     }
 
+    public void setTicketPriceInDKK(double ticketPriceInDKK) {
+        this.ticketPriceInDKK = ticketPriceInDKK;
+    }
+
+    public double getTicketPriceInDKK() {
+        return ticketPriceInDKK;
+    }
 }
