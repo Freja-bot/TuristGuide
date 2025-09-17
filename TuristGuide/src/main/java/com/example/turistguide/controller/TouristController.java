@@ -1,6 +1,7 @@
 package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
+import com.example.turistguide.service.CurrencyService;
 import com.example.turistguide.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +15,17 @@ public class TouristController {
     // lav endpoint /attractions/{nam}/tags
     // lav fail states
     private final TouristService touristService;
+    private final CurrencyService currencyService;
 
-    public TouristController(TouristService touristService) {
+    public TouristController(TouristService touristService, CurrencyService currencyService) {
         this.touristService = touristService;
+        this.currencyService = currencyService;
     }
 
     @GetMapping()
     public String getAllTouristAttraction(Model model) {
         model.addAttribute("touristAttractions", touristService.getAllTouristAttraction());
-        return "attractionList";
+        return "attraction-list";
     }
 
     @GetMapping("/add")
@@ -47,13 +50,37 @@ public class TouristController {
     }
 
     @GetMapping("{name}")
-    public String getTouristAttraction(@PathVariable(required = false) String name, Model model) {
+    public String showTouristAttraction(@PathVariable(required = false) String name, Model model) {
         TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
         if (touristAttraction != null) {
             model.addAttribute("touristAttraction", touristAttraction);
-            return "show_attraction";
+            model.addAttribute("billetPris", touristAttraction.getTicketPriceInDKK());
+            return "show-attraction";
         }
         return "redirect:index"; //create fail state
+    }
+
+    @PostMapping("/konventer/{name}")
+    public String kursKonvertering(@PathVariable String name, @RequestParam( value = "kurs") String kursNavn, Model model){
+        TouristAttraction touristAttraction = touristService.getTouristAttraction(name);
+        if (touristAttraction != null) {
+            switch (kursNavn){
+                case "DKK":
+                    model.addAttribute("billetPris", touristAttraction.getTicketPriceInDKK());
+                    break;
+                case "EUR":
+                    model.addAttribute("billetPris", currencyService.getPriceInEUR(touristAttraction.getTicketPriceInDKK()));
+                    System.out.println("test");
+                break;
+                case "USD":
+                    model.addAttribute("billetPris", currencyService.getPriceInUSD(touristAttraction.getTicketPriceInDKK()));
+                    break;
+
+            }
+            model.addAttribute("touristAttraction", touristAttraction);
+            return "show-attraction";
+        }
+        return "redirect:index";
     }
 
     @GetMapping("/{name}/edit")
@@ -63,6 +90,7 @@ public class TouristController {
             model.addAttribute("touristAttraction", touristAttraction);
             model.addAttribute("cities", touristService.getCities());
             model.addAttribute("tags", touristService.getTags());
+
             return "update-attraction-form";
         }
         return "redirect:index";
