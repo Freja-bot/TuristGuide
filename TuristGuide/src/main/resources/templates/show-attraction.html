@@ -14,7 +14,15 @@
     <h2 th:text="${touristAttraction.name}"/>
     <p th:text="'Ligger i ' + ${touristAttraction.city}"/>
     <p th:text="${touristAttraction.description}"/>
-    <p th:text="'Entrepris ' + ${touristAttraction.ticketPriceInDKK}"/>
+    <p th:text="'Entrepris ' + ${billetPris}"/>
+    <form action="#" th:action="@{/attractions/konventer/{name}(name=${touristAttraction.name})}" method="post">
+        <button type="submit">Konventer pris til:</button>
+        <select th:name="kurs">
+            <option th:value="EUR">EUR</option>
+            <option th:value="USD">USD</option>
+            <option th:value="DKK">DKK</option>
+        </select>
+    </form>
 </div>
 <a class="linkToButton" th:href="@{/attractions}">Tilbage</a>
 
