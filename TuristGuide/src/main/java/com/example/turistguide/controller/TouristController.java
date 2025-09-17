@@ -70,7 +70,6 @@ public class TouristController {
                     break;
                 case "EUR":
                     model.addAttribute("billetPris", currencyService.getPriceInEUR(touristAttraction.getTicketPriceInDKK()));
-                    System.out.println("test");
                 break;
                 case "USD":
                     model.addAttribute("billetPris", currencyService.getPriceInUSD(touristAttraction.getTicketPriceInDKK()));
