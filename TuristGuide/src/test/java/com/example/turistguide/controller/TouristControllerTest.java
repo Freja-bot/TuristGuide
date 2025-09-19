@@ -63,8 +63,32 @@ class TouristControllerTest {
 
     }
 
+    /*
+    @GetMapping("/add")
+    public String showAddAttractionForm(Model model) {
+        model.addAttribute("touristAttraction", new TouristAttraction());
+        model.addAttribute("cities", touristService.getCities());
+        model.addAttribute("tags", touristService.getTags());
+        return "add-attraction-form";
+    }
+    */
     @Test
-    void showAddAttractionForm() {
+    void showAddAttractionForm() throws Exception
+    {
+
+        when(mockedTouristService.getCities()).thenReturn(List.of
+                ("Allinge",
+                "Allingaabro",
+                "Almind",
+                "Anholt",
+                "Ans By"));
+        when(mockedTouristService.getTags()).thenReturn(List.of(Tag.values()));
+        mockMvc.perform(get("/attractions/add"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("add-attraction-form"))
+                .andExpect(model().attribute("touristAttractions", ))
+                .andExpect(model().attribute("touristAttractions", List.copyOf(attractionList)))
+                .andExpect(model().attribute("touristAttractions", hasItems(first, second, third)));
     }
 
     @Test

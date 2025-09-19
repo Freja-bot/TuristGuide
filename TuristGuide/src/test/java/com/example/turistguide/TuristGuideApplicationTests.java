@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class TuristGuideApplicationTests {
 
     @Test
-    void contextLoads() {
+    void contextLoads()
+    {
+
     }
 
 }
