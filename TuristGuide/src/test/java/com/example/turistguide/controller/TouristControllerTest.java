@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,9 +54,9 @@ class TouristControllerTest {
         mockMvc.perform(get("/attractions"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("attractionList"))
-                .andExpect(model().attribute("touristAttractions", hasSize(3)))
-                .andExpect(model().attribute("touristAttractions", List.copyOf(attractionList)))
-                        .andExpect(model().attribute("touristAttractions", hasItems(first, second, third)));
+                //.andExpect(model().attribute("touristAttractions", hasSize(3)))
+                .andExpect(model().attribute("touristAttractions", List.copyOf(attractionList)));
+                //        .andExpect(model().attribute("touristAttractions", hasItems(first, second, third)));
 
 
         verify(mockedTouristService).getAllTouristAttraction();
@@ -73,7 +73,7 @@ class TouristControllerTest {
     }
     */
     @Test
-    void showAddAttractionForm() throws Exception
+    void shouldShowAddAttractionForm() throws Exception
     {
 
         when(mockedTouristService.getCities()).thenReturn(List.of
@@ -86,13 +86,28 @@ class TouristControllerTest {
         mockMvc.perform(get("/attractions/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("add-attraction-form"))
-                .andExpect(model().attribute("touristAttractions", ))
-                .andExpect(model().attribute("touristAttractions", List.copyOf(attractionList)))
-                .andExpect(model().attribute("touristAttractions", hasItems(first, second, third)));
+               // .andExpect(model().attribute("cities", hasSize(5)))
+                .andExpect(model().attribute("cities", List.of("Allinge",
+                        "Allingaabro",
+                        "Almind",
+                        "Anholt",
+                        "Ans By")))
+               // .andExpect(model().attribute("tags", hasSize(5)))
+                .andExpect(model().attribute("tags", List.of(Tag.values())));
+
+        verify(mockedTouristService).getCities();
+        verify(mockedTouristService).getTags();
+
+
     }
 
     @Test
-    void addTouristAttraction() {
+    void addTouristAttraction() throws Exception
+    {
+        TouristAttraction touristAttraction = new TouristAttraction("BonbonLand", "Sjov park", "Anholt", List.of(Tag.ADGANG_FOR_GANGBESVAEREDE));
+        when(mockedTouristService.addTouristAttraction(any(TouristAttraction.class))).thenReturn(touristAttraction);
+        mockMvc.perform(post("/attractions/save"))
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
