@@ -45,7 +45,7 @@ public class TouristController {
         if (resultingTouristAttraction != null) {
             return "redirect:/attractions";
         }
-        return "redirect:/"; //create failed to add page
+        return "redirect:localhost:8080"; //create failed to add page
 
     }
 
@@ -57,7 +57,7 @@ public class TouristController {
             model.addAttribute("billetPris", touristAttraction.getTicketPriceInDKK());
             return "show-attraction";
         }
-        return "redirect:/"; //create fail state
+        return "redirect:index"; //create fail state
     }
 
     @PostMapping("/konventer/{name}")
@@ -79,7 +79,7 @@ public class TouristController {
             model.addAttribute("touristAttraction", touristAttraction);
             return "show-attraction";
         }
-        return "redirect:/";
+        return "redirect:index";
     }
 
     @GetMapping("/{name}/edit")
@@ -92,7 +92,7 @@ public class TouristController {
 
             return "update-attraction-form";
         }
-        return "redirect:/";
+        return "redirect:index";
     }
 
     @GetMapping("/{name}/tags")
