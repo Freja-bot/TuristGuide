@@ -12,8 +12,7 @@ public class TouristService {
 
     private final TouristRepository touristRepository;
 
-    public TouristService(TouristRepository touristRepository)
-    {
+    public TouristService(TouristRepository touristRepository) {
         this.touristRepository = touristRepository;
     }
 
