@@ -79,7 +79,12 @@ a {
     border: 0;
 }
 
-.linkToButton {
+.linkToButton:hover, button:hover{
+    background-color: #ff00ff;
+    font-size: 20px;
+}
+
+.linkToButton, button {
     font-family: "Times New Roman";
     text-decoration: none;
     appearance: auto;
