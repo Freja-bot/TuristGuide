@@ -40,10 +40,10 @@ public class TouristRepository {
     }
 
     public TouristAttraction getTouristAttraction(String name) {
-        String sql = "SELECT * FROM tourist_attractions where name = '" + name + "'";
-        List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristAttractionRowMapper());
-        String sqlTags = "select tag.name from tags join tag on tags.tag_name=tag.name where tags.attraction_name='" + name + "'";
-        List<String> tags = jdbcTemplate.query(sqlTags, new TagRowMapper());
+        String sql = "SELECT * FROM tourist_attractions where name = ?";
+        List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristAttractionRowMapper(),name);
+        String sqlTags = "select tag.name from tags join tag on tags.tag_name=tag.name where tags.attraction_name = ?";
+        List<String> tags = jdbcTemplate.query(sqlTags, new TagRowMapper(),name);
         if (attractions.size() > 0) {
             TouristAttraction attraction = attractions.get(0);
             attraction.setTags(tags);

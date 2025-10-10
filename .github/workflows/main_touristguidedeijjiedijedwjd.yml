@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - Turist-Guide-EK-Hold-A-2025-Vinter-Gruppe-7
+name: Build and deploy JAR app to Azure Web App - touristguidedeijjiedijedwjd
 
 on:
   push:
@@ -25,6 +25,10 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
+        env:
+          PROD_DATABASE_URL: ${{secrets.PROD_DATABASE_URL}}
+          PROD_USERNAME: ${{secrets.PROD_USERNAME}}
+          PROD_PASSWORD: ${{secrets.PROD_PASSWORD}}
         run: mvn clean install
 
       - name: Upload artifact for deployment job
@@ -49,15 +53,16 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A7608F41A47045B6A43457C7F341F0CA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C91A07743EFF4D88B20B10A0DC62F564 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_144D9F2E72034DAAB579C46A9017D904 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_406C0E52C123404482C92891A66A0B6A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AF0720791781447AB941C5AE6A74A47D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7C6469514E2D4F378B2145AAA95467CF }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'Turist-Guide-EK-Hold-A-2025-Vinter-Gruppe-7'
+          app-name: 'touristguidedeijjiedijedwjd'
           slot-name: 'Production'
           package: '*.jar'
+
           

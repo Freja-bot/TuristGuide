@@ -575,4 +575,4 @@ insert into city value ('Allinge'),
 ('Aars'),
 ('Årslev'),
 ('Aarup'),
-('Ukendt Lokation')
+('Ukendt Lokation');

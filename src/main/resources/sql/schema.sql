@@ -30,9 +30,11 @@ create table city
 
 create table tags
 (
-    attraction_name varchar(255) not null,
+    attraction_name varchar(155) not null,
     tag_name        varchar(155) not null,
     primary key (attraction_name, tag_name),
     foreign key (attraction_name) references tourist_attractions (name)
+        on delete cascade,
+    foreign key (tag_name) references tag (name)
         on delete cascade
 );
